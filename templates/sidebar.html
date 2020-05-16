@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'all.css'%}">
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+    <!-- <script type="text/javascript" src="{% static 'jquery.js'%}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="{% static 'all.js'%}"></script> -->
+
+   <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" /> -->
+
+
+
+
+    </head>
+    <style>
+
+
+
+<style>
+.btn1 {
+  background-color:#4b4276;
+  border: none;
+  color: white;
+  padding:5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.btn1:hover {
+  background-color:#5e5394;
+}
+
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+
+
+    }
+    ul li ul.dropdown-menu{
+        min-width: 100%;
+        display: none;
+        position: absolute;
+        z-index: 999;
+        left: 0;
+    }
+    ul li:hover ul.dropdown-menu{
+        display: block;
+        background: #7c71b0;
+
+    }
+    .main_content{
+      padding: 20px;
+    }
+
+
+
+
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar" id="main-menu" class="main-menu collapse navbar-collapse">
+        <h2>HRM</h2>
+        <ul class="nav navbar-nav">
+           <li><a href="dashboard"><i class="fas fa-columns"></i>Dashboard</a></li>
+           <li><a href="#" ><i class="fas fa-user-circle"></i> User</a></li>
+            <li><a href="employee_view"><i class="fas fa-user-circle"></i>Employee</a></li>
+            <li><a href="#"><i class="fas fa-user-check"></i>Attendence</a></li>
+          <li><a href="holiday_view"><i class="fas fa-calendar-alt"></i>Holiday Calendar</a></li>
+          <li><a href="#"><i class="fas fa-calendar-minus"></i></i>Leave</a></li>
+          <li><a href="#"><i class="fas fa-rupee-sign"></i>Payroll</a></li>
+          <li><a href="#"><i class="fas fa-exclamation-circle"></i></i>Reminders</a></li>
+          <li><a href="#"><i class="fas fa-chart-line"></i>MIS Report</a></li>
+          <li><a href="#"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+
+        </ul>
+
+    </div>
+
+    <div class="main_content">
+
+
+
+        <div class="header">Welcome!! Have a nice day.</div>
+        <div class="info">
+        </div>
+         {% block content %}
+
+
+  {% endblock %}
+
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>

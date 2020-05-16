@@ -1,0 +1,79 @@
+{% extends 'sidebar.html' %}
+{% block content %}
+    <style>
+    #main{
+    box-shadow: 1px 2px 5px;
+    }
+    </style>
+<a class="btn btn-primary" href="holiday_view" role="button">Holiday Table</a> &nbsp
+
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-10 col-md-8 col-lg-6">
+
+            <form id="main" action=""  method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                    <div class="card-header">
+                        <strong>Add Holiday</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <!-- <form action="#" method="post" class="form-horizontal"> -->
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="{{newform.holiday_name.name}}" class=" form-control-label">Holiday Name</label></div>
+                                <div class="col-12 col-md-9"><input id="{{ newform.holiday_name.id_for_label }}" name="{{ newform.holiday_name.name }}" type="text" class="form-control {{ newform.holiday_name.name }}"
+                                    {% if newform.holiday_name.value != None %}value="{{ newform.holiday_name.value|stringformat:'s' }}"{% endif %}
+                                    maxlength="{{ newform.holiday_name.field.max_length }}" {% if newform.holiday_name.field.required %}required{% endif %}>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="{{newform.holiday_date.name}}" class="form-control-label">Date</label></div>
+                                <div class="col-12 col-md-9"><input id="{{ newform.holiday_date.id_for_label }}" name="{{ newform.holiday_date.name }}" type="date" class="form-control {{ newform.holiday_date.name }}"
+                                    {% if newform.holiday_date.value != None %}value="{{ newform.holiday_date.value|stringformat:'s' }}"{% endif %}
+                                    maxlength="{{ newform.holiday_date.field.max_length }}" {% if newform.holiday_date.field.required %}required{% endif %}>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="{{newform.holiday_description.name}}" class=" form-control-label">Description</label></div>
+                                <div class="col-12 col-md-9">
+                                    <textarea name="{{newform.holiday_description.name}}" rows="9" placeholder="Content..." class="form-control"></textarea>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+<!-- <form action=""  method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+
+      <table>
+      {%for f in newform%}
+      <tr>
+        <th align="left">{{f.label}}</th>
+        <td>{{f}}</td>
+
+      </tr>
+
+      {% endfor %}
+
+    </table>
+
+      <input type="submit"  value="Save">
+
+    </form> -->
+{% endblock %}

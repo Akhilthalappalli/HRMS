@@ -1,0 +1,222 @@
+{% extends 'sidebar.html' %}
+{% block content %}
+  {% load static %}
+
+        <form action="search" class="form-inline" method="post">
+          {% csrf_token %}
+
+
+    <a class="btn btn-primary" href="employee_grid_view" role="button">Grid</a> &nbsp
+    <a class="btn btn-primary" href="employee_view" role="button">List</a>&nbsp &nbsp
+    <a class="btn btn-primary" href="employee" role="button">Add Employee</a>&nbsp &nbsp
+
+    <input class="form-control mr-sm-2" type="search"  placeholder="Search" aria-label="Search" name="q">
+    <button class="btn btn-outline-success my-2 my-sm-0"  type="submit">Search</button>
+  </form><br>
+
+
+
+
+
+
+
+
+
+          <meta charset="UTF-8">
+          <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+          <!-- <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/> -->
+
+          <!-- <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"> -->
+
+          <!-- <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"> -->
+
+          <!-- <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}"> -->
+
+          <!-- <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}"> -->
+
+          <!-- <link rel="stylesheet" type="text/css" href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}"> -->
+
+          <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}"> -->
+          <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+          </head>
+          <body>
+
+          <div class="limiter">
+          <div class="container-table100">
+            <div class="wrap-table100">
+              <div class="table100 ver1">
+                <div class="table100-firstcol">
+
+                  <table>
+
+                      <thead>
+
+                        <tr class="row100 head">
+                          <th class="cell100 column1">Employee ID</th>
+                        </tr>
+                      </thead>
+                      {% for d in data %}
+
+                      <tbody>
+
+
+                        <tr class="row100 body">
+
+                           <td class="cell100 column1">{{d.empid}}</td>
+
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+
+                    </table>
+
+                  </div>
+
+                  <div class="wrap-table100-nextcols js-pscroll">
+                    <div class="table100-nextcols">
+                      <table>
+                        <thead>
+                          <tr class="row100 head">
+
+                            <th class="cell100 column2">Picture</th>
+                            <th class="cell100 column3">First Name</th>
+                            <th class="cell100 column4">Last Name</th>
+                            <th class="cell100 column5">Phone</th>
+                            <th class="cell100 column5">Email</th>
+                            <th class="cell100 column6">Gender</th>
+                            <th class="cell100 column7">Address</th>
+                            <th class="cell100 column8">Permenet Address</th>
+                            <th class="cell100 column8">Date Of Birth</th>
+                            <th class="cell100 column8">Marital Status</th>
+                            <th class="cell100 column8">Postal code</th>
+                            <th class="cell100 column8">City</th>
+                            <th class="cell100 column8">Country</th>
+                            <th class="cell100 column8">Designation</th>
+                            <th class="cell100 column8">Despartment</th>
+                            <th class="cell100 column8">Date Of Join</th>
+                            <th class="cell100 column8">Work Email</th>
+                            <th class="cell100 column8">Work Mobile</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                             {% for d in data %}
+                          <tr class="row100 body">
+
+                            <td class="cell100 column2"><img src="{{d.picture.url}}" width="20" height="20"></td>
+                            <td class="cell100 column3">{{d.fname}}</td>
+                            <td class="cell100 column4">{{d.lname}}</td>
+                            <td class="cell100 column5">{{d.phone}}</td>
+                            <td class="cell100 column6">{{d.email}}</td>
+                            <td class="cell100 column7">{{d.gender}}</td>
+                            <td class="cell100 column8">{{d.address}}</td>
+                            <td class="cell100 column8">{{d.paddress}}</td>
+                            <td class="cell100 column8">{{d.dob}}</td>
+                            <td class="cell100 column8">{{d.mstatus}}</td>
+                            <td class="cell100 column8">{{d.post}}</td>
+                            <td class="cell100 column8">{{d.city}}</td>
+                            <td class="cell100 column8">{{d.country}}</td>
+                            <td class="cell100 column8">{{d.designation}}</td>
+                            <td class="cell100 column8">{{d.department}}</td>
+                            <td class="cell100 column8">{{d.doj}}</td>
+                            <td class="cell100 column8">{{d.wemail}}</td>
+                            <td class="cell100 column8">{{d.wphone}}</td>
+                          </tr>
+                        </tbody>
+                      {% endfor %}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+
+          <script src="vendor/bootstrap/js/popper.js"></script>
+          <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+          <script src="vendor/select2/select2.min.js"></script>
+
+          <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+          <script>
+          $('.js-pscroll').each(function(){
+          var ps = new PerfectScrollbar(this);
+          $(window).on('resize', function(){
+          ps.update();
+          })
+          $(this).on('ps-x-reach-start', function(){
+          $(this).parent().find('.table100-firstcol').removeClass('shadow-table100-firstcol');
+          });
+          $(this).on('ps-scroll-x', function(){
+          $(this).parent().find('.table100-firstcol').addClass('shadow-table100-firstcol');
+          });
+          });
+          </script>
+
+
+
+<!--
+                <div class="container">
+
+
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+
+                <th>Employee Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Permenet Address </th>
+                <th>Date Of Birth</th>
+                <th>Marital Status</th>
+                <th>Postal code</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Designation</th>
+                <th>Despartment</th>
+                <th>Date Of Join</th>
+                <th>Work Email</th>
+                <th>Work Mobile</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for d in data %}
+      <tr>
+
+                  <td>{{d.empid}}</td>
+                  <td>{{d.fname}}</td>
+                  <td>{{d.lname}}</td>
+                  <td>{{d.phone}}</td>
+                  <td>{{d.email}}</td>
+                  <td>{{d.gender}}</td>
+                  <td>{{d.address}}</td>
+                  <td>{{d.paddress}}</td>
+                  <td>{{d.dob}}</td>
+                  <td>{{d.mstatus}}</td>
+                  <td>{{d.post}}</td>
+                  <td>{{d.city}}</td>
+                  <td>{{d.country}}</td>
+                  <td>{{d.designation}}</td>
+                  <td>{{d.department}}</td>
+                  <td>{{d.doj}}</td>
+                  <td>{{d.wemail}}</td>
+                  <td>{{d.wphone}}</td>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div> -->
+
+
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'sidebar.html' %}
+{% block content %}
+
+
+
+<form action="holiday_search" class="form-inline" method="post">
+          {% csrf_token %}
+
+
+    <a class="btn btn-primary" href="holiday" role="button">Add Holiday</a> &nbsp &nbsp
+
+    <input class="form-control mr-sm-2" type="date"  placeholder="Search" aria-label="Search" name="q">
+    <button class="btn btn-outline-success my-2 my-sm-0"  type="submit">Search</button>
+  </form><br>
+
+
+
+
+
+
+  <!--  <div class="limiter">
+          <div class="container-table100">
+            <div class="wrap-table100">
+              <div class="table100 ver1">
+
+                    </table>
+
+                  </div>
+
+                  <div class="wrap-table100-nextcols js-pscroll">
+                    <div class="table100-nextcols">
+                      <table>
+                        <thead>
+                          <tr class="row100 head">
+
+                            <th class="cell100 column2">holiday_name</th>
+                            <th class="cell100 column3"> holiday_date</th>
+                            <th class="cell100 column4">holiday_description</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                             {% for d in data %}
+                          <tr class="row100 body">
+
+                            <td class="cell100 column2">{{d.holiday_name}}</td>
+                            <td class="cell100 column3">{{d.holiday_date}}</td>
+                            <td class="cell100 column4">{{d.holiday_description}}</td>
+
+                          </tr>
+                        </tbody>
+                      {% endfor %}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+
+          <script src="vendor/bootstrap/js/popper.js"></script>
+          <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+          <script src="vendor/select2/select2.min.js"></script>
+
+          <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+          <script>
+          $('.js-pscroll').each(function(){
+          var ps = new PerfectScrollbar(this);
+          $(window).on('resize', function(){
+          ps.update();
+          })
+          $(this).on('ps-x-reach-start', function(){
+          $(this).parent().find('.table100-firstcol').removeClass('shadow-table100-firstcol');
+          });
+          $(this).on('ps-scroll-x', function(){
+          $(this).parent().find('.table100-firstcol').addClass('shadow-table100-firstcol');
+          });
+          });
+          </script> -->
+
+
+
+
+
+           <!-- <table style="width:100%">
+              <tr>
+                <th>Holiday Name</th>
+                <th>Date</th>
+                <th>Description</th>
+
+              </tr>
+              {% for d in data %}
+                <tr>
+
+                  <td>{{d.holiday_name}}</td>
+                  <td>{{d.holiday_date}}</td>
+                  <td>{{d.holiday_description}}</td>
+
+                </tr>
+              {% endfor %}
+            </table> -->
+
+
+            <div class="container">
+
+
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Holiday Name</th>
+        <th>Date</th>
+        <th>Description</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for d in data %}
+      <tr>
+        <td>{{d.holiday_name}}</td>
+        <td>{{d.holiday_date}}</td>
+        <td>{{d.holiday_description}}</td>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+
+
+
+
+{% endblock %}
