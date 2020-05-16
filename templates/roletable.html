@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% block content %}
+<!--  <div class="container">-->
+                <div class="card">
+                          <div class="card-header">
+                            <strong class="card-title" style="font-size:20px;"><strong><strong>USER ROLES</strong></strong>
+                            <button style="float:right" type="button" class="btn1 btn-default openPopup" data-toggle="modal" data-target="#myModal" href="#" data-href ="roleadd">ADD USER ROLES <i class="fa fa-plus-circle" style="font-size:20px;color:white"></i></button>
+                          </div>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+           <h3 style="color:#4b4276"><strong>ADD</strong>USER ROLES</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body">
+        </div>
+<!--        <div class="modal-footer">-->
+<!--           <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>-->
+<!--        </div>-->
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+                        <div class="card-body">
+                            <font size="3" face="Arial">
+                            <table class="table">
+                                <thead bgcolor="#4b4276" style="color:white;font-size:15px" class="thead">
+                                    <tr>
+<!--                                      <th scope="col"></th>-->
+                                      <th scope="col">ROLES</th>
+                                      <th scope="col"></th>
+                                      <th scope="col"></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+
+                                </tr>
+                              </tbody>
+                            </table></font>
+                        </div>
+                </div>
+  </div>
+
+{% endblock %}

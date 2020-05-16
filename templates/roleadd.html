@@ -1,0 +1,117 @@
+<style>
+    .block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #f1f1f1;
+  padding: 7px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+}
+
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+</style>
+
+<div class="container">
+  <div class="col-md-6">
+    <div class="form-group">
+
+      <div class="form-group"><label for="{{ form.role.name }}" class=" form-control-label">User Role</label><select name="{{form.role.name}}" id="{{form.role.id_for_label}}" class="form-control col-sm-10">
+      {% for choice in form.role.field.choices %}
+         <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+      {% endfor %}
+      </select>
+      </div>
+
+      <ul id="myUL">
+        {% for choice in form.menu.field.choices %}
+        {% if not forloop.first %}
+          <li value="{{ choice.0 }}"><span class="caret">{{ choice.1 }}</span>
+            <ul class="nested">
+              <div class="form-inline">
+                <li>
+                  <div class="form-group "><label for="{{ form.show.name }}" class=" form-control-label">Show</label>
+                      <input type="checkbox" name="{{ form.show.name }}" id="{{ form.show.id_for_label }}" class=" form-control {{ form.show.name }}"
+                  </div>
+                </li>
+                <li>
+                  <div class="form-group "><label for="{{ form.show.name }}" class=" form-control-label">Create</label>
+                      <input type="checkbox" name="{{ form.show.name }}" id="{{ form.show.id_for_label }}" class=" form-control {{ form.show.name }}"
+                  </div>
+                </li>
+                <li>
+                  <div class="form-group "><label for="{{ form.show.name }}" class=" form-control-label">Edit</label>
+                      <input type="checkbox" name="{{ form.show.name }}" id="{{ form.show.id_for_label }}" class=" form-control {{ form.show.name }}"
+                  </div>
+                </li>
+                <li>
+                  <div class="form-group "><label for="{{ form.show.name }}" class=" form-control-label">Delete</label>
+                      <input type="checkbox" name="{{ form.show.name }}" id="{{ form.show.id_for_label }}" class=" form-control {{ form.show.name }}"
+                  </div>
+                </li>
+              </div>
+
+            </ul>
+          </li>
+        {% endif %}
+        {% endfor %}
+
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+</script>
