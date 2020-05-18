@@ -4,7 +4,7 @@
 
 <div class="card">
                           <div class="card-header">
-                            <strong class="card-title" style="font-size:20px; margin-bottom:0px"><strong><strong>USERS</strong></strong>
+                            <strong class="card-title" style="font-size:20px;margin-bottom:0px"><strong><strong>USERS</strong></strong>
                             <button style="float:right" type="button" class="btn2 btn-default openPopup" data-toggle="modal" data-target="#myModal" href="#" data-href ="manage?id=-1">ADD USER <i class="fa fa-plus-circle" style="font-size:20px;color:white"></i></button>
                           </div>
   <div class="modal fade" id="myModal" role="dialog">
@@ -31,8 +31,8 @@
 
                         <div class="card-body" style="padding-top:5px">
                             <form action="searchUser" method="POST">{% csrf_token %}
-                               <div class="right" style="padding-bottom:5px">
-                                   <input type="text" style="padding-bottom:2px" placeholder="Search.." name="q">
+                               <div class="right" style="margin-bottom:5px;">
+                                   <input type="text" placeholder="Search.." name="q">
                                    <button type="submit"><i class="fa fa-search"></i></button>
                                </div>
                             </form>
