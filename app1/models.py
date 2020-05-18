@@ -59,3 +59,29 @@ class add_holiday(models.Model):
     holiday_name = models.CharField(max_length=50)
     holiday_date = models.DateTimeField(null=True)
     holiday_description = models.CharField(max_length=100)
+
+class UserRole(models.Model):
+    description = models.CharField(max_length=40, unique=True)
+
+    def __str__(self):
+        return self.description
+
+
+class UserStatus(models.Model):
+    description = models.CharField(max_length=40, unique=True)
+
+    def __str__(self):
+        return self.description
+
+
+class User(models.Model):
+    fullname = models.CharField(max_length=50, unique=True)
+    username = models.CharField(max_length=15, unique=True)
+    password = models.CharField(max_length=20)
+    confirm_password = models.CharField(max_length=20)
+    role = models.ForeignKey(UserRole, on_delete=models.CASCADE, )
+    status = models.ForeignKey(UserStatus, on_delete=models.CASCADE, )
+
+    def __str__(self):
+        return self.username
+

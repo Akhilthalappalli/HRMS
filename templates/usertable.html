@@ -1,0 +1,69 @@
+{% extends 'sidebar.html' %}
+{% block content %}
+<!--  <div class="container">-->
+
+<div class="card">
+                          <div class="card-header">
+                            <strong class="card-title" style="font-size:20px; margin-bottom:0px"><strong><strong>USERS</strong></strong>
+                            <button style="float:right" type="button" class="btn2 btn-default openPopup" data-toggle="modal" data-target="#myModal" href="#" data-href ="manage?id=-1">ADD USER <i class="fa fa-plus-circle" style="font-size:20px;color:white"></i></button>
+                          </div>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+           <h3 style="color:#4b4276"><strong>ADD</strong>USER</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+<!--           <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>-->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+                        <div class="card-body" style="padding-top:5px">
+                            <form action="searchUser" method="POST">{% csrf_token %}
+                               <div class="right" style="padding-bottom:5px">
+                                   <input type="text" style="padding-bottom:2px" placeholder="Search.." name="q">
+                                   <button type="submit"><i class="fa fa-search"></i></button>
+                               </div>
+                            </form>
+                            <font size="3" face="Arial">
+                            <table class="table">
+                                <thead bgcolor="#4b4276" style="color:white;font-size:15px" class="thead">
+                                    <tr>
+                                      <th scope="col">USER NAME</th>
+                                      <th scope="col">USER ROLE</th>
+                                      <th scope="col">FULL NAME</th>
+                                      <th scope="col">STATUS</th>
+                                      <th scope="col"></th>
+                                      <th scope="col"></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              {% for d in data %}
+                                <tr scope="row">
+                                    <td>{{d.username}}</td>
+                                    <td>{{d.role}}</td>
+                                    <td>{{d.fullname}}</td>
+                                    <td>{{d.status}}</td>
+                                    <td><a data-toggle="modal" data-target="#myModal" href="#" data-href="manage?id={{d.id}}"  class="openPopup"> <i class="fas fa-pen" style='font-size:18px;color:#c0c0c0'></i></a></td>
+                                    <td><a href="delete/{{d.id}}" onclick="return myFunction();"><i class='fas fa-trash' style='font-size:18px;color:#c0c0c0'></i></a></td>
+                                </tr>
+                              {% endfor %}
+
+                              </tbody>
+                            </table></font>
+                        </div>
+                </div>
+  </div>
+
+{% endblock %}

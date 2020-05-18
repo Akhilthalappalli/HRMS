@@ -33,6 +33,13 @@ urlpatterns = [
      path('search',views.search,name="search" ),
      path('grid_search',views.grid_search,name="grid_search" ),
      path('holiday_search',views.holiday_search,name="holiday_search" ),
+    path('useradd',views.saveUser,name='useradd'),
+    path('usertable', views.usertable, name='usertable'),
+    path('roletable', views.roletable, name='roletable'),
+    path('roleadd', views.roleadd, name='roleadd'),
+    path('searchUser', views.searchUser, name='searchUser'),
+    path('delete/<int:usr_id>', views.delete, name='delete'),
+    path('manage', views.manage, name='manage'),
 
 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

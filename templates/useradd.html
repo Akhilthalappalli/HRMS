@@ -1,0 +1,100 @@
+<script type="text/javascript">
+  var check = function() {
+  if (document.getElementById('{{form.password.id_for_label}}').value ==
+    document.getElementById('confirm_password').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+    document.getElementById('submit').disabled = false;
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+    document.getElementById('submit').disabled = true;
+  }
+}
+
+</script>
+
+<!--                 <div class="col-lg-6">-->
+<!--                        <div class="container">-->
+<!--                            <div class="card-header"><strong>ADD</strong><small> USER</small></div>-->
+<!--                            <div class="card-body card-block">-->
+<div class="container">
+        {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+        {% endif %}
+
+
+         <form action="manage?id={{id}}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group"><label for="{{ form.fullname.name }}" class=" form-control-label">Full Name</label>
+                                      <input type="text" name="{{ form.fullname.name }}" id="{{ form.fullname.id_for_label }}" class=" form-control {{ form.fullname.name }}"
+                                      {% if form.fullname.value != None %}value="{{ form.fullname.value|stringformat:'s' }}"{% endif %}
+                                      maxlength="{{ form.fullname.field.max_length }}" {% if form.fullname.field.required %}required{% endif %}></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group "><label for="{{ form.username.name }}" class=" form-control-label">User Name</label>
+                                        <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" class=" form-control {{ form.username.name }}"
+                                        {% if form.username.value != None %}value="{{ form.username.value|stringformat:'s' }}"{% endif %}
+                                        maxlength="{{ form.username.field.max_length }}" {% if form.username.field.required %}required{% endif %}></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class = "col-sm-6">
+                                    <div class="form-group"><label for="{{ form.role.name }}" class=" form-control-label">User Role</label><select name="{{form.role.name}}" id="{{form.role.id_for_label}}" class="form-control col-sm-10">
+                                    {% for choice in form.role.field.choices %}
+                                       <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                    {% endfor %}
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class = "col-sm-6">
+                                  <div class="form-group"><label for="{{form.status.name}}"  class=" form-control-label">Status</label><select name="{{form.status.name}}" id="{{form.status.id_for_label}}"class="form-control col-sm-6">
+                                  {% for choice in form.status.field.choices %}
+                                       <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                    {% endfor %}
+                                    </select>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                   <div class="form-group"><label for="{{form.password.name}}" class=" form-control-label">Password</label>
+                                       <input  type="password" name="{{form.password.name}}" id="{{form.password.id_for_label}}" class=" form-control {{ form.password.name }}"
+                                       {% if form.password.value != None %}value="{{ form.password.value|stringformat:'s' }}"{% endif %}
+                                       maxlength="{{ form.password.field.max_length }}" {% if form.password.field.required %}required{% endif %}  ></div>
+                                </div>
+                                <div class="col-md-6">
+                                   <div class="form-group"><label for="confirm_password" class="form-control-label">Confirm Password</label>
+                                       <input type="password" name="confirm_password" id="confirm_password" class=" form-control confirm_password"
+                                       {% if form.cpassword.value != None %}value="{{ form.cpassword.value|stringformat:'s' }}"{% endif %}
+                                       maxlength="{{ form.cpassword.field.max_length }}" {% if form.cpassword.field.required %}required{% endif %} onkeyup='check();' ></div>
+                                        <span id='message'></span>
+                                </div>
+                            </div>
+<!--                            </div>-->
+                            <div style="float:right" >
+                                  <button type="submit" class="btn btn-primary">
+                                     <i class="fa fa-check"></i> Save
+                                  </button>
+                                  <button type="reset" class="btn btn-danger" data-dismiss="modal">
+                                     <i class="fa fa-ban"></i> Cancel
+                                  </button>
+                            </div>
+         </form>
+</div>
+<!--                     </div>-->
+<!--                 </div>-->
+
