@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from app1.forms import EmployeeForm
+from app1.forms import EmployeeForm,RoleForm
 from app1.models import Employee
 from app1.models import add_holiday
 from app1.forms import HolidayForm
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
-from app1.forms import UserForm
+from app1.forms import UserForm,RolePermission
 from app1.models import User
 
 # Create your views here.
@@ -126,7 +126,8 @@ def roletable(request):
 
 
 def roleadd(request):
-    return render(request, 'roleadd.html')
+    form = RoleForm()
+    return render(request, 'roleadd.html',{"form":form})
 
 
 def saveUser(request):

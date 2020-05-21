@@ -85,3 +85,19 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
+
+class MenuMaster(models.Model):
+    description = models.CharField(max_length=40, unique=True)
+
+    def __str__(self):
+        return self.description
+
+
+class RolePermission(models.Model):
+    role = models.ForeignKey(UserRole, on_delete=models.CASCADE, )
+    menu = models.ForeignKey(MenuMaster, on_delete=models.CASCADE, )
+    show = models.BooleanField()
+    create = models.BooleanField()
+    edit = models.BooleanField()
+    delete = models.BooleanField()
+

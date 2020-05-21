@@ -1,6 +1,6 @@
 from django.contrib import admin
 from app1.models import Gender,MaritalStatus,Designation,Department,Employee,add_holiday
-from app1.models import UserRole,UserStatus,User
+from app1.models import UserRole,UserStatus,User,MenuMaster,RolePermission
 
 # Register your models here.
 
@@ -13,3 +13,6 @@ admin.site.register(add_holiday)
 admin.site.register(UserRole)
 admin.site.register(UserStatus)
 admin.site.register(User)
+admin.site.register(MenuMaster)
+admin.site.register(RolePermission)
+

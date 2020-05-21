@@ -9,12 +9,123 @@
   cursor: pointer;
   text-align: left;
 }
+
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+
+}
+
+.caret::before {
+  content: "\25B6";
+  color: #4b4276;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);
+
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
 </style>
+
 <div class="container">
-   <div class="col-md-6" >
-    <div class="form-group"><label class=" form-control-label">Roles</label><input type="text" id="roles" class="form-control"></div>
-   </div>
-    <br><br>
-    <u>DATA GROUP PERMISSION</u>
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="form-group"><label for="{{ form.role.name }}" class=" form-control-label">User Role</label><select name="{{form.role.name}}" id="{{form.role.id_for_label}}" class="form-control col-sm-10">
+      {% for choice in form.role.field.choices %}
+         <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+      {% endfor %}
+      </select>
+      </div>
+      <br>
+      <p style="margin-bottom:3px">ROLE PERMISSIONS</p>
+      <hr style="margin-top:0px;margin-bottom:4px;border-top:2px solid;color:black;background-color:black;">
+
+
+      <ul id="myUL">
+        {% for choice in form.menu.field.choices %}
+        {% if not forloop.first %}
+          <li value="{{ choice.0 }}"><span class="caret">{{ choice.1 }}</span>
+            <ul class="nested">
+              <div class="form-inline">
+                <li>
+                  <div class="form-group "><label for="{{ form.show.name }}" class=" form-control-label">Show</label>
+                      <input type="checkbox" name="{{ form.show.name }}" id="{{ form.show.id_for_label }}" class=" form-control {{ form.show.name }}">
+                  </div>
+                </li>
+                <li>
+                  <div class="form-group "><label for="{{ form.create.name }}" class=" form-control-label">Create</label>
+                      <input type="checkbox" name="{{ form.create.name }}" id="{{ form.create.id_for_label }}" class=" form-control {{ form.create.name }}">
+                  </div>
+                </li>
+                <li>
+                  <div class="form-group "><label for="{{ form.edit.name }}" class=" form-control-label">Edit</label>
+                      <input type="checkbox" name="{{ form.edit.name }}" id="{{ form.edit.id_for_label }}" class=" form-control {{ form.edit.name }}">
+                  </div>
+                </li>
+                <li>
+                  <div class="form-group "><label for="{{ form.delete.name }}" class=" form-control-label">Delete</label>
+                      <input type="checkbox" name="{{ form.delete.name }}" id="{{ form.delete.id_for_label }}" class=" form-control {{ form.delete.name }}">
+                  </div>
+                </li>
+              </div>
+
+            </ul>
+          </li>
+
+        {% endif %}
+        {% endfor %}
+        <div style="float:right" >
+                                  <button type="submit" class="btn btn-primary">
+                                     <i class="fa fa-check"></i> Save
+                                  </button>
+                                  <button type="reset" class="btn btn-danger" data-dismiss="modal">
+                                     <i class="fa fa-ban"></i> Cancel
+                                  </button>
+                            </div>
+
+
+      </ul>
+
+    </div>
+
+  </div>
 
 </div>
+
+
+<script>
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+</script>
