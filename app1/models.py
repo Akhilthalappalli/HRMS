@@ -99,5 +99,4 @@ class RolePermission(models.Model):
     show = models.BooleanField()
     create = models.BooleanField()
     edit = models.BooleanField()
-    delete = models.BooleanField()
-
+    delet = models.BooleanField()

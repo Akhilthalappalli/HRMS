@@ -7,8 +7,8 @@ from app1.forms import HolidayForm
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
-from app1.forms import UserForm,RolePermission
-from app1.models import User
+from app1.forms import UserForm, RolePermissionForm
+from app1.models import User, UserRole, RolePermission, MenuMaster
 
 # Create your views here.
 def dashboard(request):
@@ -122,12 +122,52 @@ def usertable(request):
 
 
 def roletable(request):
-    return render(request, 'roletable.html')
+    data = UserRole.objects.all()
+    return render(request, 'roletable.html',{"data":data})
 
 
 def roleadd(request):
     form = RoleForm()
+    if request.method == 'POST':
+        form = RoleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('roletable')
+        else:
+            return HttpResponse("*****ERROR IN VALIDATION******")
     return render(request, 'roleadd.html',{"form":form})
+
+def rolepermission(request):
+    role_id = int(request.GET.get("id",-1))
+    data=''
+    form = RolePermissionForm()
+
+    if role_id > 0:
+        data = RolePermission.objects.all().filter(role = role_id)
+
+        if request.method == 'POST':
+            #print("&&&&&&&&&&&&&&")
+            #print(str(request.POST))
+
+            #Delete existing
+            for item in data:
+                item.delete()
+
+            for m in MenuMaster.objects.all():
+                opt = request.POST.getlist(str(m))
+
+                if len(opt) > 0:
+                    obj = RolePermission.objects.create(
+                        role=UserRole.objects.get(id=role_id),
+                        menu=m,
+                        show='Show' in opt,
+                        create='Create' in opt,
+                        edit='Edit' in opt,
+                        delet='Delete' in opt)
+            return redirect('roletable')
+        #else:
+            #return HttpResponse("*****ERROR IN VALIDATION******")
+    return render(request, 'RolePermission.html',{"form":form, "data":data})
 
 
 def saveUser(request):

@@ -40,9 +40,14 @@
                                   </tr>
                               </thead>
                               <tbody>
+                                {% for d in data %}
                                 <tr>
+                                  <td scope="col">{{d.description}}</td>
+                                  <td scope="col">Edit</td>
+                                  <td scope="col"><a class="openPopup" data-toggle="modal" data-target="#myModal" href="#" data-href ="rolepermission?id={{d.id}}">Permissions</a> </td>
 
                                 </tr>
+                                {% endfor %}
                               </tbody>
                             </table></font>
                         </div>

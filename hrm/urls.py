@@ -37,6 +37,7 @@ urlpatterns = [
     path('usertable', views.usertable, name='usertable'),
     path('roletable', views.roletable, name='roletable'),
     path('roleadd', views.roleadd, name='roleadd'),
+    path('rolepermission', views.rolepermission, name='rolepermission'),
     path('searchUser', views.searchUser, name='searchUser'),
     path('delete/<int:usr_id>', views.delete, name='delete'),
     path('manage', views.manage, name='manage'),

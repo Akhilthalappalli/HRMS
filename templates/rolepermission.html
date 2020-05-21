@@ -1,0 +1,145 @@
+<style>
+    .block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #f1f1f1;
+  padding: 7px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+}
+
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+
+}
+
+.caret::before {
+  content: "\25B6";
+  color: #4b4276;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);
+
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+</style>
+
+<form action="{{request.get_full_path}}" method="post">
+{% csrf_token %}
+
+<div class="container">
+  <div class="col-md-6">
+    <div class="form-group">
+      <br>
+      <p style="margin-bottom:3px">ROLE PERMISSIONS</p>
+      <hr style="margin-top:0px;margin-bottom:4px;border-top:2px solid;color:black;background-color:black;">
+
+
+      <ul id="myUL">
+        {% for choice in form.menu.field.choices %}
+        {% if not forloop.first %}
+          <li value="{{ choice.0 }}"><span class="caret">{{ choice.1 }}</span>
+            <ul class="nested">
+              <div class="form-inline">
+                <li>
+                  <div class="form-group "><label for="{{ choice.0 }}" class=" form-control-label">Show</label>
+                      <input type="checkbox" name="{{ choice.1 }}" id="{{ choice.0 }}" value="Show" class=" form-control {{ choice.1 }}"
+                      {% for obj in data %}
+                          {% if obj.menu.id == choice.0 and obj.show == 1%}
+                            checked
+                          {% endif %}
+                        {% endfor %}>
+                  </div>
+                </li>
+                <li>
+                  <div class="form-group "><label for="{{ choice.0 }}" class=" form-control-label">Create</label>
+                      <input type="checkbox" name="{{ choice.1 }}" id="{{ choice.0 }}" value="Create" class=" form-control {{ choice.1 }}"                      {% for obj in data %}
+                          {% if obj.menu.id == choice.0 and obj.create == 1%}
+                            checked
+                          {% endif %}
+                        {% endfor %}>
+                  </div>
+                </li>
+                <li>
+                  <div class="form-group "><label for="{{ choice.0 }}" class=" form-control-label">Edit</label>
+                      <input type="checkbox" name="{{ choice.1 }}" id="{{ choice.0 }}" value="Edit" class=" form-control {{ choice.1 }}"                      {% for obj in data %}
+                          {% if obj.menu.id == choice.0 and obj.edit == 1%}
+                            checked
+                          {% endif %}
+                        {% endfor %}>
+                  </div>
+                </li>
+                <li>
+                  <div class="form-group "><label for="{{ choice.0 }}" class=" form-control-label">Delete</label>
+                      <input type="checkbox" name="{{ choice.1 }}" id="{{ choice.0 }}" value="Delete" class=" form-control {{ choice.1 }}"                      {% for obj in data %}
+                          {% if obj.menu.id == choice.0 and obj.delet == 1%}
+                            checked
+                          {% endif %}
+                        {% endfor %}>
+                  </div>
+                </li>
+              </div>
+
+            </ul>
+          </li>
+
+        {% endif %}
+        {% endfor %}
+        <div style="float:right" >
+                                  <button type="submit" class="btn btn-primary">
+                                     <i class="fa fa-check"></i> Save
+                                  </button>
+                                  <button type="reset" class="btn btn-danger" data-dismiss="modal">
+                                     <i class="fa fa-ban"></i> Cancel
+                                  </button>
+                            </div>
+
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
+</form>
+
+<script>
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+</script>
