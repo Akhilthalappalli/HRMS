@@ -26,24 +26,40 @@
                                     maxlength="{{ newform.holiday_name.field.max_length }}" {% if newform.holiday_name.field.required %}required{% endif %}>
                                 </div>
                             </div>
-                            <div class="row form-group">
+                            <!-- <div class="row form-group">
                                 <div class="col col-md-3"><label for="{{newform.holiday_date.name}}" class="form-control-label">Date</label></div>
                                 <div class="col-12 col-md-9"><input id="{{ newform.holiday_date.id_for_label }}" name="{{ newform.holiday_date.name }}" type="date" class="form-control {{ newform.holiday_date.name }}"
                                     {% if newform.holiday_date.value != None %}value="{{ newform.holiday_date.value|stringformat:'s' }}"{% endif %}
                                     maxlength="{{ newform.holiday_date.field.max_length }}" {% if newform.holiday_date.field.required %}required{% endif %}>
+                                </div>
+                            </div> -->
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="{{newform.holiday_date.name}}" class="form-control-label">Date</label></div>
+                                <div class="col-12 col-md-9"><input placeholder="{{data1}}" type="text" onfocus="(this.type='date')" id="holiday_date" name="{{ newform.holiday_date.name }}" class="form-control {{ newform.holiday_date.name }}"
+                                    {% if newform.holiday_date.value != None %}value="{{ newform.holiday_date.value|stringformat:'s' }}"{% endif %}
+                                    maxlength="{{ newform.holiday_date.field.max_length }}" {% if newform.holiday_date.field.required %}required{% endif %}>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="{{newform.holiday_description.name}}" class=" form-control-label">Holiday Name</label></div>
+                                <div class="col-12 col-md-9"><input id="{{ newform.holiday_description.id_for_label }}" name="{{ newform.holiday_description.name }}" type="text" class="form-control {{ newform.holiday_description.name }}"
+                                    {% if newform.holiday_description.value != None %}value="{{ newform.holiday_description.value|stringformat:'s' }}"{% endif %}
+                                    maxlength="{{ newform.holiday_description.field.max_length }}" {% if newform.holiday_description.field.required %}required{% endif %}>
                                 </div>
                             </div>
 
 
 
 
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="{{newform.holiday_description.name}}" class=" form-control-label">Description</label></div>
-                                <div class="col-12 col-md-9">
-                                    <textarea name="{{newform.holiday_description.name}}" rows="9" placeholder="Content..." class="form-control"></textarea>
-                                </div>
-                            </form>
-                        </div>
+                                <!-- <div class="row form-group">
+                                    <div class="col col-md-3"><label for="{{newform.holiday_description.name}}" class=" form-control-label">Description</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <textarea  name="{{ newform.holiday_description.name }}" id="{{ newform.holiday_description.id_for_label }}" rows="9" value="{{ newform.holiday_description.id_for_label }}" class="form-control"></textarea>
+
+                                                                        </div>
+
+                        </div> -->
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary btn-sm">
@@ -51,6 +67,7 @@
                             </button>
 
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>

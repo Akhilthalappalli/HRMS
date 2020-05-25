@@ -1,5 +1,25 @@
 {% extends 'sidebar.html' %}
 {% block content %}
+{% load static %}
+
+<style>
+  a.btn:hover {
+     -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+     -o-transform: scale(1.1);
+ }
+ a.btn {
+     -webkit-transform: scale(0.8);
+     -moz-transform: scale(0.8);
+     -o-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+     -moz-transition-duration: 0.5s;
+     -o-transition-duration: 0.5s;
+ }
+</style>
+
+
+
 
 
 
@@ -18,120 +38,35 @@
 
 
 
-  <!--  <div class="limiter">
-          <div class="container-table100">
-            <div class="wrap-table100">
-              <div class="table100 ver1">
-
-                    </table>
-
-                  </div>
-
-                  <div class="wrap-table100-nextcols js-pscroll">
-                    <div class="table100-nextcols">
-                      <table>
-                        <thead>
-                          <tr class="row100 head">
-
-                            <th class="cell100 column2">holiday_name</th>
-                            <th class="cell100 column3"> holiday_date</th>
-                            <th class="cell100 column4">holiday_description</th>
-
-                          </tr>
-                        </thead>
-                        <tbody>
-                             {% for d in data %}
-                          <tr class="row100 body">
-
-                            <td class="cell100 column2">{{d.holiday_name}}</td>
-                            <td class="cell100 column3">{{d.holiday_date}}</td>
-                            <td class="cell100 column4">{{d.holiday_description}}</td>
-
-                          </tr>
-                        </tbody>
-                      {% endfor %}
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-
-          <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-
-          <script src="vendor/bootstrap/js/popper.js"></script>
-          <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-          <script src="vendor/select2/select2.min.js"></script>
-
-          <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-          <script>
-          $('.js-pscroll').each(function(){
-          var ps = new PerfectScrollbar(this);
-          $(window).on('resize', function(){
-          ps.update();
-          })
-          $(this).on('ps-x-reach-start', function(){
-          $(this).parent().find('.table100-firstcol').removeClass('shadow-table100-firstcol');
-          });
-          $(this).on('ps-scroll-x', function(){
-          $(this).parent().find('.table100-firstcol').addClass('shadow-table100-firstcol');
-          });
-          });
-          </script> -->
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">holiday_name</th>
+      <th scope="col">holiday_Date</th>
+      <th scope="col">holiday_description</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in data %}
+    <tr>
+      <th scope="row">{{d.holiday_name}}</th>
+      <td>{{d.holiday_date}}</td>
+      <td>{{d.holiday_description}}</td>
+      <td><a href="manage_holiday?id={{d.id}}" class="btn btn-primary a-btn-slide-text">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        <span><strong>Edit</strong></span>
+    </a></td>
+    <!-- <td><a href="delete/{{d.id}}" onclick="return myFunction();"><i class="fas fa-trash"></i></a></td> -->
+    <td><a href="holiday_delete/{{d.id}}" class="btn btn-primary a-btn-slide-text">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        <span><strong>Delete</strong></span>
+    </a></td>
+    </tr>
+    {% endfor %}
 
 
-
-
-
-           <!-- <table style="width:100%">
-              <tr>
-                <th>Holiday Name</th>
-                <th>Date</th>
-                <th>Description</th>
-
-              </tr>
-              {% for d in data %}
-                <tr>
-
-                  <td>{{d.holiday_name}}</td>
-                  <td>{{d.holiday_date}}</td>
-                  <td>{{d.holiday_description}}</td>
-
-                </tr>
-              {% endfor %}
-            </table> -->
-
-
-            <div class="container">
-
-
-  <table class="table table-dark table-striped">
-    <thead>
-      <tr>
-        <th>Holiday Name</th>
-        <th>Date</th>
-        <th>Description</th>
-
-
-      </tr>
-    </thead>
-    <tbody>
-      {% for d in data %}
-      <tr>
-        <td>{{d.holiday_name}}</td>
-        <td>{{d.holiday_date}}</td>
-        <td>{{d.holiday_description}}</td>
-
-      </tr>
-      {% endfor %}
-
-    </tbody>
-  </table>
-</div>
-
-
-
+</table>
 
 {% endblock %}

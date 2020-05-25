@@ -98,6 +98,8 @@
                             <th class="cell100 column8">Date Of Join</th>
                             <th class="cell100 column8">Work Email</th>
                             <th class="cell100 column8">Work Mobile</th>
+                            <th class="cell100 column8">Edit</th>
+                            <th class="cell100 column8">Delete</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -122,6 +124,9 @@
                             <td class="cell100 column8">{{d.doj}}</td>
                             <td class="cell100 column8">{{d.wemail}}</td>
                             <td class="cell100 column8">{{d.wphone}}</td>
+                             <td class="cell100 column8"> <a href="manage_employee?id={{d.id}}">Edit</a></td>
+                             <td class="cell100 column8"> <a href="employee_delete/{{d.id}}">delete</a></td>
+
                           </tr>
                         </tbody>
                       {% endfor %}

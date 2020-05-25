@@ -221,3 +221,71 @@ def searchUser(request):
 
         )
     return render(request, 'usertable.html', {"data": usr})
+
+
+def manage_employee(request):
+
+
+    manage_employee_id = int(request.GET["id"])
+
+    empimage=''
+
+    form = EmployeeForm()
+    if manage_employee_id > 0:
+        employee_record = Employee.objects.get(id = manage_employee_id)
+        form = EmployeeForm(instance=employee_record)
+        empimage = employee_record.picture
+
+
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST, request.FILES)
+        if manage_employee_id > 0:
+            form = EmployeeForm(request.POST, request.FILES,instance= employee_record)
+
+        if form.is_valid():
+             form.save()
+             return HttpResponseRedirect('/employee_view')
+
+    return render(request,'employee_reg.html',{"form":form,"id":manage_employee_id,"empimage":empimage})
+
+def employee_delete(request, employee_id):
+    employee_record = Employee.objects.get(id = employee_id)
+
+    if employee_record:
+        employee_record.delete()
+        return HttpResponseRedirect('/employee_view')
+
+    return HttpResponse("Error: Invalid Record")
+
+def holiday_delete(request, holiday_id):
+    holiday_record = add_holiday.objects.get(id = holiday_id)
+
+    if holiday_record:
+        holiday_record.delete()
+        return HttpResponseRedirect('/holiday_view')
+
+    return HttpResponse("Error: Invalid Record")
+
+def manage_holiday(request):
+
+
+    manage_holiday_id = int(request.GET["id"])
+
+
+
+    newform = HolidayForm()
+    if manage_holiday_id > 0:
+        holiday_record = add_holiday.objects.get(id = manage_holiday_id)
+        newform = HolidayForm(instance=holiday_record)
+
+
+    if request.method == 'POST':
+        newform = HolidayForm(request.POST)
+        if manage_holiday_id > 0:
+            newform = HolidayForm(request.POST,instance= holiday_record)
+
+        if newform.is_valid():
+             newform.save()
+             return HttpResponseRedirect('/holiday_view')
+
+    return render(request,'addholiday.html',{"newform":newform,"id":manage_holiday_id})

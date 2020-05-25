@@ -113,11 +113,13 @@
 
                                                      <!-- {{ form.picture }} -->
                                            <div class="form-group">
-                                                <label for="{{ form.picture.name }}" class="control-label mb-1">picture</label>
+                                                <!-- <label for="{{ form.picture.name }}" class="control-label mb-1">picture</label>
                                                 <input id="{{ form.picture.id_for_label }}" name="{{ form.picture.name }}" type="file" class="form-control {{ form.picture.name }}"
-                                                {% if form.email.value != None %}value="{{ form.email.value|stringformat:'s' }}"{% endif %}
-                                                maxlength="{{ form.picture.field.max_length }}" {% if form.email.field.required %}required{% endif %}>
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                                {% if form.pictures.value != None %}value="{{ form.picture.value|stringformat:'s' }}"{% endif %}
+                                                maxlength="{{ form.picture.field.max_length }}" {% if form.picture.field.required %}required{% endif %}>
+                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span> -->
+
+                                                {{ form.picture }}
 
 
                                             </div>
@@ -142,12 +144,18 @@
                                                 <div class="col col-md-3"><label for="{{ form.gender.name }}" class=" form-control-label">Gender</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="{{ form.gender.name }}" id="{{ form.gender.id_for_label }}" class="form-control">
-                                                        {% for choice in form.gender.field.choices %}
-                                                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                                        {% endfor %}
+                                                      {% for choice in form.gender.field.choices %}
+
+                  {% if not forloop.first %}
+                    <option value="{{choice.0}}" {% if form.gender.value == choice.0 %}selected{% endif %}>{{choice.1}}</option>
+                  {% endif %}
+
+                  {% endfor %}
                                                     </select>
                                                 </div>
                                             </div>
+
+
 
 
                                             <!-- <button type="submit" class="btn btn-lg btn-info btn-block">
@@ -222,8 +230,12 @@
                                                <div class="form-group"><label for="{{ form.mstatus.name }}" class=" form-control-label">Marital Status</label>
                                                  <select name="{{ form.mstatus.name }}" id="{{ form.mstatus.id_for_label }}" class="form-control">
                                                      {% for choice in form.mstatus.field.choices %}
-                                                         <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                                     {% endfor %}
+
+                  {% if not forloop.first %}
+                    <option value="{{choice.0}}" {% if form.mstatus.value == choice.0 %}selected{% endif %}>{{choice.1}}</option>
+                  {% endif %}
+
+                  {% endfor %}
                                                  </select>
                                              </div>
                                            </div>
@@ -266,8 +278,12 @@
                                                 <div class="col-12 col-md-9">
                                                   <select name="{{ form.designation.name }}" id="{{ form.designation.id_for_label }}" class="form-control">
                                                       {% for choice in form.designation.field.choices %}
-                                                          <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                                      {% endfor %}
+
+                  {% if not forloop.first %}
+                    <option value="{{choice.0}}" {% if form.designation.value == choice.0 %}selected{% endif %}>{{choice.1}}</option>
+                  {% endif %}
+
+                  {% endfor %}
                                                   </select>
                                                 </div>
                                             </div>
@@ -292,8 +308,12 @@
                                                 <div class="col-12 col-md-9">
                                                   <select name="{{ form.department.name }}" id="{{ form.department.id_for_label }}" class="form-control">
                                                       {% for choice in form.department.field.choices %}
-                                                          <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                                      {% endfor %}
+
+                  {% if not forloop.first %}
+                    <option value="{{choice.0}}" {% if form.department.value == choice.0 %}selected{% endif %}>{{choice.1}}</option>
+                  {% endif %}
+
+                  {% endfor %}
                                                   </select>
                                                 </div>
                                             </div>

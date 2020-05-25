@@ -41,6 +41,9 @@ urlpatterns = [
     path('searchUser', views.searchUser, name='searchUser'),
     path('delete/<int:usr_id>', views.delete, name='delete'),
     path('manage', views.manage, name='manage'),
-
+    path('manage_employee', views.manage_employee),
+     path('employee_delete/<int:employee_id>',views.employee_delete,name='employee_delete'),
+     path('holiday_delete/<int:holiday_id>',views.holiday_delete,name='holiday_delete'),
+         path('manage_holiday', views.manage_holiday),
 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
