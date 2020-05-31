@@ -46,4 +46,10 @@ urlpatterns = [
      path('holiday_delete/<int:holiday_id>',views.holiday_delete,name='holiday_delete'),
          path('manage_holiday', views.manage_holiday),
 
-]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+     path('attendance_view', views.attendance_view, name="attendance_view"),
+     path('attendance_header', views.attendance_header, name="attendance_header"),
+     path('attendance_search', views.attendance_search, name='attendance_search'),
+     path('manage_attendance', views.manage_attendance),
+     path('attendance_delete/<int:attendance_id>', views.attendance_delete, name='attendance_delete'),
+
+              ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

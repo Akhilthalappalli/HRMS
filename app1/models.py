@@ -1,6 +1,7 @@
 from django.db import models
-
+from datetime import datetime
 # Create your models here.
+
 class Gender(models.Model):
     description = models.CharField(max_length=20,unique=True)
 
@@ -100,3 +101,9 @@ class RolePermission(models.Model):
     create = models.BooleanField()
     edit = models.BooleanField()
     delet = models.BooleanField()
+
+class attendance(models.Model):
+    attendance_date = models.DateTimeField(blank=True,default=datetime.now())
+    attendance_checkin = models.CharField(max_length=100,default="9.00")
+    attendance_checkout = models.CharField(max_length=100,default="5.00")
+    attendance_emp = models.ForeignKey(Employee,on_delete=models.CASCADE)

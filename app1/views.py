@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from app1.forms import EmployeeForm,RoleForm
+from app1.forms import EmployeeForm,RoleForm,AttendanceForm
 from app1.models import Employee
 from app1.models import add_holiday
 from app1.forms import HolidayForm
@@ -9,6 +9,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from app1.forms import UserForm, RolePermissionForm
 from app1.models import User, UserRole, RolePermission, MenuMaster
+from.import models
+import datetime
+
 
 # Create your views here.
 def dashboard(request):
@@ -289,3 +292,64 @@ def manage_holiday(request):
              return HttpResponseRedirect('/holiday_view')
 
     return render(request,'addholiday.html',{"newform":newform,"id":manage_holiday_id})
+
+
+
+def attendance_view(request):
+    # data = attendance.objects.all()
+    # print("*************************************************************")
+    # print(data),{"data":data}
+    data=models.attendance.objects.all()
+    return render(request,"attendance_view.html",{'data':data})
+
+def attendance_search(request):
+    query=request.POST.get("q" or None)
+    att = models.attendance.objects.all()
+
+
+    if query is not None:
+            att = att.filter(
+            Q(attendance_date__icontains=query)
+            )
+
+    return render(request,'attendance_view.html',{"data":att})
+def attendance_header(request):
+    emp = Employee.objects.all()
+    tdy = datetime.date.today()
+
+    form = AttendanceForm()
+    if request.method == 'POST':
+
+        form = AttendanceForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            # messages.success(request, 'Form submission successful')
+
+            return HttpResponseRedirect('attendance_header')
+        else:
+            return HttpResponseRedirect('dashboard')
+
+    return render(request,'attendance_header.html',{"form":form,"data":emp,"data1":tdy})
+
+def manage_attendance(request):
+    manage_attendance_id = int(request.GET["id"])
+    form = AttendanceForm()
+    if manage_attendance_id > 0:
+        # attendance_record = attendance.objects.get(id = manage_attendance_id)
+        attendance_record=models.attendance.objects.get(id=manage_attendance_id)
+        form = AttendanceForm(instance=attendance_record)
+    if request.method == 'POST':
+        form = AttendanceForm(request.POST, request.FILES)
+        if manage_attendance_id > 0:
+            form = AttendanceForm(request.POST,instance= attendance_record)
+
+        if form.is_valid():
+             form.save()
+             return HttpResponseRedirect('/attendance_view')
+    return render(request,'attendance_header.html',{'form':form,'id':manage_attendance_id})
+def attendance_delete(request,attendance_id):
+    attendance_delete_record=models.attendance.objects.get(id=attendance_id)
+    if attendance_delete_record:
+        attendance_delete_record.delete()
+        return HttpResponseRedirect('/attendance_view')

@@ -1,0 +1,84 @@
+{% extends 'sidebar.html' %}
+{% block content %}
+  {% load static %}
+
+
+
+<form action="attendance_search" class="form-inline" method="post">
+          {% csrf_token %}
+
+
+          <a class="btn btn-primary" href="attendance_header" role="button">Add Attendance</a>&nbsp &nbsp
+
+
+
+
+
+    <input class="form-control mr-sm-2" type="date"  placeholder="Search" aria-label="Search" name="q">
+    <button class="btn btn-outline-success my-2 my-sm-0"  type="submit">Search</button>
+</form><br>
+
+<style>
+  a.btn:hover {
+     -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+     -o-transform: scale(1.1);
+ }
+ a.btn {
+     -webkit-transform: scale(0.8);
+     -moz-transform: scale(0.8);
+     -o-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+     -moz-transition-duration: 0.5s;
+     -o-transition-duration: 0.5s;
+ }
+</style>
+
+
+
+
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Check In</th>
+      <th scope="col">Check Out</th>
+      <th scope="col">Employee ID</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in data %}
+    <tr>
+      <th scope="row">{{d.attendance_date}}</th>
+      <th>{{d.attendance_checkin}}</th>
+      <td>{{d.attendance_checkout}}</td>
+      <td>{{d.attendance_emp}}</td>
+
+      <td><a href="manage_attendance?id={{d.id}}" class="btn btn-primary a-btn-slide-text">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        <span><strong>Edit</strong></span>
+    </a></td>
+    <!-- <td><a href="delete/{{d.id}}" onclick="return myFunction();"><i class="fas fa-trash"></i></a></td> -->
+    <td><a href="attendance_delete/{{d.id}}" class="btn btn-primary a-btn-slide-text">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        <span><strong>Delete</strong></span>
+    </a></td>
+    </tr>
+    {% endfor %}
+
+
+</table>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
