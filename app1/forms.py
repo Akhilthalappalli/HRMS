@@ -1,5 +1,5 @@
 from django import forms
-from app1.models import Employee
+from app1.models import Employee, Salary
 from app1.models import add_holiday
 from app1.models import User, UserRole, RolePermission,attendance
 
@@ -39,3 +39,8 @@ class AttendanceForm(forms.ModelForm):
     class Meta:
         model = attendance
         fields = '__all__'
+
+class SalaryForm(forms.ModelForm):
+    class Meta:
+        model= Salary
+        fields='__all__'

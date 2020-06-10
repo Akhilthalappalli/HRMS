@@ -1,0 +1,194 @@
+{% extends 'sidebar.html' %}
+{% block content %}
+
+
+<script type="text/javascript">
+  var calculate = function() {
+
+    var bp = parseInt(document.getElementById('{{form.bp.id_for_label}}').value);
+    var da = bp *0.02;
+    var ta = bp *0.03;
+    var hra = bp *0.03;
+    var ma = bp *0.02;
+    var e_total = da+ta+hra+ma;
+    var pf = bp *0.2;
+    var tax= bp *0.3;
+    var d_total= pf+tax;
+    var total= bp+e_total+d_total;
+    document.getElementById('{{form.bp.id_for_label}}').value = bp;
+    document.getElementById('{{form.da.id_for_label}}').value = da;
+    document.getElementById('{{form.ta.id_for_label}}').value = ta;
+    document.getElementById('{{form.hra.id_for_label}}').value = hra;
+    document.getElementById('{{form.ma.id_for_label}}').value = ma;
+    document.getElementById('{{form.e_total.id_for_label}}').value= e_total;
+    document.getElementById('{{form.pf.id_for_label}}').value = pf;
+    document.getElementById('{{form.tax.id_for_label}}').value = tax;
+    document.getElementById('{{form.d_total.id_for_label}}').value = d_total;
+    document.getElementById('{{ form.total.id_for_label }}').value = total;
+}
+
+</script>
+
+  <!-- <input type="hidden" id="da" value="{{da_rate}}"> -->
+  <!-- <input type="hidden" id="ta" value="{{ta_rate}}">
+  <input type="hidden" id="hra" value="{{hra_rate}}">
+  <input type="hidden" id="ma" value="{{ma_rate}}">
+  <input type="hidden" id="pf" value="{{pf_rate}}">
+  <input type="hidden" id="tax" value="{{tax_rate}}"> -->
+
+
+
+{% if form.errors %}
+  {% for field in form %}
+      {% for error in field.errors %}
+          <div class="alert alert-danger">
+              <strong>{{field.label}} : {{ error|escape }}</strong>
+          </div>
+      {% endfor %}
+  {% endfor %}
+  {% for error in form.non_field_errors %}
+      <div class="alert alert-danger">
+          <strong>{{ error|escape }}</strong>
+      </div>
+  {% endfor %}
+  {% endif %}
+
+<form action="addsalary" method="post" enctype="multipart/form-data" class="form-horizontal">{% csrf_token %}
+<div class="row">
+<div class="col-md-8 mx-auto">
+<div class="card card-body">
+  <h3 class="text-center mb-4">Salary Scale</h3>
+  <div class="card-body card-block">
+    <div class="row form-group">
+      <div class="col col-md-3"><label for="{{ form.department.name }}" class=" form-control-label">Department</label></div>
+      <div class="col-12 col-md-9">
+        <select name="{{ form.department.name }}" id="{{ form.department.id_for_label }}" class="form-control">
+          {% for choice in form.department.field.choices %}
+          <option value="{{ choice.0 }}"> {{ choice.1 }} </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col col-md-3"><label for="{{ form.designation.name }}" class=" form-control-label">Designation</label></div>
+      <div class="col-12 col-md-9">
+        <select name="{{ form.designation.name }}" id="{{ form.designation.id_for_label }}" class="form-control">
+          {% for choice in form.designation.field.choices %}
+            <option value="{{ choice.0 }}"> {{ choice.1 }} </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+      <div class="row form-group">
+        <div class="col col-md-3"><label for="{{ form.bp.name }}" class=" form-control-label">Basic Salary</label></div>
+        <div class="col-12 col-md-9"><input type="text" id="{{ form.bp.id_for_label }}" name="{{form.bp.name}}" placeholder="0" class="form-control "
+          {% if form.bp.value != none  %}value="{{ form.bp.value|stringformat:'s' }}" {% endif %} required onkeyup='calculate();'></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-lg-6">
+<div class="card">
+  <div class="card-header">
+    <strong>Earnings</strong>
+  </div>
+  <div class="card-body card-block">
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <div class="form-group">
+          <label for="{{form.da.name}}">DA:</label>
+          <input type="text" placeholder="dearness allowence"id="{{ form.da.id_for_label }}" name="{{form.da.name}}" class="form-control"><br>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="{{form.ta.name}}">TA:</label>
+          <input type="text" id="{{ form.ta.id_for_label }}" placeholder="travel allowence" name="{{form.ta.name}}" class="form-control"><br>
+        </div>
+      </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="{{form.hra.name}}">HRA:</label>
+        <input type="text" id="{{ form.hra.id_for_label }}" placeholder="house-rent allowence" name="{{form.hra.name}}" class="form-control"><br>
+      </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+          <label for="{{form.ma.name}}">MA:</label>
+          <input id="{{ form.ma.id_for_label }}" type="text" placeholder="medical allowence"  name="{{form.ma.name}}" class="form-control"><br>
+        </div>
+      </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="{{form.e_total.name}}">Total Earnings:</label>
+        <input type="text" id="{{ form.e_total.id_for_label }}" name="{{form.e_total.name}}" class="form-control"><br>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="card">
+  <div class="card-header">
+    <strong>Deductions</strong>
+  </div>
+  <div class="card-body card-block">
+    <div class="row form-group">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="{{ form.pf.name }}">PF:</label>
+          <input id="{{ form.pf.id_for_label }}" type="text" placeholder="provident fund"  name="{{ form.pf.name }}" class="form-control"><br>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="{{ form.tax.name }}">Tax:</label>
+          <input id="{{ form.tax.id_for_label }}" type="text" placeholder="government tax"  name="{{ form.tax.name }}" class="form-control"><br>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="form-group">
+            <label for="{{form.d_total.name}}">Total Deductions:</label>
+            <input type="text" id="{{ form.d_total.id_for_label }}" placeholder="sum"  name="{{form.d_total.name}}" class="form-control"><br>
+<!--                <label for="sum">Total:</label>-->
+<!--                <input type="text" placeholder="sum" name="sum1" class="form-control"><br>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+                    <div class="card-footer" align="left">
+                    <label for="{{form.total.name}}">Net salary</label>
+                    <input type="number" id="{{ form.total.id_for_label }}" placeholder="sum"  value="{{total}}"name="{{form.total.name}}" class="form-control"><br>
+                    </div>
+
+                    <br><br>
+
+
+
+                    <div class="card-footer" align="center">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="fas fa-paper-plane"></i> Submit
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                    <i class="fa fa-ban"></i> Reset
+                    </button>
+                    </div>
+                    </form>
+
+               <!-- </fieldset>
+          </div>
+  </div>
+</div>
+</div> -->
+{% endblock %}

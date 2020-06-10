@@ -107,3 +107,21 @@ class attendance(models.Model):
     attendance_checkin = models.CharField(max_length=100,default="9.00")
     attendance_checkout = models.CharField(max_length=100,default="5.00")
     attendance_emp = models.ForeignKey(Employee,on_delete=models.CASCADE)
+
+
+class Salary(models.Model):
+    designation = models.ForeignKey(Designation,on_delete=models.CASCADE,)
+    department = models.ForeignKey(Department,on_delete=models.CASCADE,)
+    bp = models.IntegerField()
+    da = models.IntegerField()
+    ta = models.IntegerField()
+    hra = models.IntegerField()
+    ma = models.IntegerField()
+    pf = models.IntegerField()
+    tax = models.IntegerField()
+    e_total=models.IntegerField()
+    d_total=models.IntegerField()
+    total = models.IntegerField()
+
+    # def __str__(self):
+    #     return self.designation

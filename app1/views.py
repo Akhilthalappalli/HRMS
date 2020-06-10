@@ -1,14 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from app1.forms import EmployeeForm,RoleForm,AttendanceForm
-from app1.models import Employee
+from app1.forms import EmployeeForm,RoleForm,AttendanceForm, SalaryForm
 from app1.models import add_holiday
 from app1.forms import HolidayForm
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from app1.forms import UserForm, RolePermissionForm
-from app1.models import User, UserRole, RolePermission, MenuMaster
+from app1.models import User, UserRole, RolePermission, MenuMaster, Salary, Employee
 from.import models
 import datetime
 
@@ -353,3 +352,30 @@ def attendance_delete(request,attendance_id):
     if attendance_delete_record:
         attendance_delete_record.delete()
         return HttpResponseRedirect('/attendance_view')
+
+def salaryren(request):
+    sal1= Salary.objects.all()
+    # form = salaryForm()
+    # if request.method == 'POST':
+    #     print("qqqqqqqqqqq")
+    #     form = salaryForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         print("wwwwwwwwwwwwww")
+    #         form.save()
+    #         return HttpResponseRedirect('salary')
+    #     else:
+    #         print("############INVALID FORM############")
+    return render(request,'Salary.html',{"sal1":sal1},) #,"hra_rate":0.3,"ma_rate":-0.1,"da_rate":0.2,"ta_rate":0.1,"pf_rate":-0.25,"tax_rate":-0.2,"e-total_rate":("da_rate"+"hra_rate"+"ta_rate")})
+
+def addsalary(request):
+    form = SalaryForm()
+    if request.method == 'POST':
+        print("qqqqqqqqqqq")
+        form = SalaryForm(request.POST, request.FILES)
+        if form.is_valid():
+            print("wwwwwwwwwwwwww")
+            form.save()
+            return HttpResponseRedirect('salaryren')
+        else:
+            print("############INVALID FORM############")
+    return render(request,'addsalary.html',{"form":form},) #,"hra_rate":0.3,"ma_rate":-0.1,"da_rate":0.2,"ta_rate":0.1,"pf_rate":-0.25,"tax_rate":-0.2,"e-total_rate":("da_rate"+"hra_rate"+"ta_rate")})
