@@ -1,6 +1,14 @@
 {% extends 'sidebar.html' %}
 {% block content %}
 
+<script type="text/javascript">
+
+  function delfunc(){
+    return confirm("press OK for Delete Record");
+
+  }
+
+</script>
   <!-- <div class="container-fluid" style="margin-top: 7px;">
     <button type="button" class="btn btn-success" name="button" style="float:Right"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp; Add New Salary Scale &nbsp;<i class="fa fa-money-bill" aria-hidden="true"></i></button>
   </div> -->
@@ -20,7 +28,8 @@
               <th scope="col">Tax(-5%)</th>
               <th scope="col">P.F(-2%)</th>
               <th scope="col">M.A(-2%)</th>
-              <th scope="col">Net Salary</th>
+              <th scope="col">Total</th>
+              <th scope="col">Net salary</th>
               <th scope="col">EDIT</th>
               <th scope="col">DELETE</th>
             </tr>
@@ -39,8 +48,9 @@
                 <td>{{s.pf}}</td>
                 <td>{{s.ma}}</td>
                 <td>{{s.total}}</td>
-                <td><a href="editsalary"><button type="button" class="btn btn-warning" name="button"><i class="fa fa-edit"></i></button></a></td>
-                <td><button type="button" class="btn btn-warning" name="button"><i class="fa fa-eraser"></i></button></td>
+                <td>{{s.totalhand}}</td>
+                <td><a href="editsalary/{{s.id}}"><button type="button" class="btn btn-warning" name="button"><i class="fa fa-edit"></i></button></a></td>
+                <td><a href="deletesalary/{{s.id}}" onclick="return delfunc();"><button type="button" class="btn btn-warning" name="button"><i class="fa fa-eraser"></i></button></a></td>
               </tr>
               {% endfor %}
           </tbody>

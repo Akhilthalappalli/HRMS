@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from app1.forms import EmployeeForm,RoleForm,AttendanceForm, SalaryForm
 from app1.models import add_holiday
@@ -379,3 +379,24 @@ def addsalary(request):
         else:
             print("############INVALID FORM############")
     return render(request,'addsalary.html',{"form":form},) #,"hra_rate":0.3,"ma_rate":-0.1,"da_rate":0.2,"ta_rate":0.1,"pf_rate":-0.25,"tax_rate":-0.2,"e-total_rate":("da_rate"+"hra_rate"+"ta_rate")})
+
+
+def editsalary(request, salid):
+    ob = Salary.objects.get(id=salid)
+    form = SalaryForm(instance = ob)
+    if request.method == 'POST':
+        print("qqqqqqqqqqq")
+        form = SalaryForm(request.POST, request.FILES, instance=ob)
+        if form.is_valid():
+            print("wwwwwwwwwwwwww")
+            form.save()
+            return HttpResponseRedirect('salaryren')
+        else:
+            print("############INVALID FORM############")
+    return render(request,'addsalary.html',{"form":form},) #,"hra_rate":0.3,"ma_rate":-0.1,"da_rate":0.2,"ta_rate":0.1,"pf_rate":-0.25,"tax_rate":-0.2,"e-total_rate":("da_rate"+"hra_rate"+"ta_rate")})
+
+def deletesalary(request, salid):
+    ob = Salary.objects.get(id=salid)
+    if ob:
+        ob.delete()
+        return redirect('salaryren')

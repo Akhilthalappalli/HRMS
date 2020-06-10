@@ -122,6 +122,6 @@ class Salary(models.Model):
     e_total=models.IntegerField()
     d_total=models.IntegerField()
     total = models.IntegerField()
-
+    totalhand = models.IntegerField()
     # def __str__(self):
     #     return self.designation

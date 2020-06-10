@@ -53,5 +53,7 @@ urlpatterns = [
      path('attendance_delete/<int:attendance_id>', views.attendance_delete, name='attendance_delete'),
      path('salaryren',views.salaryren,name="salaryren" ),
      path('addsalary', views.addsalary, name="addsalary"),
+     path('editsalary/<int:salid>', views.editsalary, name="editsalary"),
+     path('deletesalary/<int:salid>', views.deletesalary, name="deletesalary"),
 
               ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

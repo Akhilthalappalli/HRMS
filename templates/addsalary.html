@@ -15,6 +15,7 @@
     var tax= bp *0.3;
     var d_total= pf+tax;
     var total= bp+e_total+d_total;
+    var totalhand= total-d_total;
     document.getElementById('{{form.bp.id_for_label}}').value = bp;
     document.getElementById('{{form.da.id_for_label}}').value = da;
     document.getElementById('{{form.ta.id_for_label}}').value = ta;
@@ -25,6 +26,7 @@
     document.getElementById('{{form.tax.id_for_label}}').value = tax;
     document.getElementById('{{form.d_total.id_for_label}}').value = d_total;
     document.getElementById('{{ form.total.id_for_label }}').value = total;
+    document.getElementById('{{ form.totalhand.id_for_label }}').value = totalhand;
 }
 
 </script>
@@ -170,6 +172,9 @@
                     <div class="card-footer" align="left">
                     <label for="{{form.total.name}}">Net salary</label>
                     <input type="number" id="{{ form.total.id_for_label }}" placeholder="sum"  value="{{total}}"name="{{form.total.name}}" class="form-control"><br>
+
+                    <label for="{{form.totalhand.name}}">Salary in hand</label>
+                    <input type="number" id="{{ form.totalhand.id_for_label }}" placeholder="sum"  value="{{totalhand}}"name="{{form.totalhand.name}}" class="form-control"><br>
                     </div>
 
                     <br><br>
