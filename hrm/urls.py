@@ -56,4 +56,9 @@ urlpatterns = [
      path('editsalary/<int:salid>', views.editsalary, name="editsalary"),
      path('deletesalary/<int:salid>', views.deletesalary, name="deletesalary"),
 
+      path('leave_view', views.leave_view),
+     path('manage_leave',views.manage_leave,name="manage_leave" ),
+     path('leave', views.leave),
+     path('addleave', views.addleave),
+
               ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

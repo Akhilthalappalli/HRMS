@@ -1,0 +1,91 @@
+{% extends 'sidebar.html' %}
+{% block content %}
+    <style>
+    #main{
+    box-shadow: 1px 2px 5px;
+    }
+    </style>
+    <!-- <form id="main" action=""  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        -->
+        <!--   {{form.as_p}} -->
+        <a class="btn btn-primary" href="leave_view" role="button">Holiday Table</a> &nbsp
+        <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+                <div class="col-10 col-md-8 col-lg-6">
+                    <form id="main" action=""  method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} <br> add more   </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div class="card-header">
+                            <strong>Add Leave</strong>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="{{ form.leave_emp.name }}" class=" form-control-label">Employee ID</label></div>
+                            <div class="col-12 col-md-9">
+                                <select name="{{ form.leave_emp.name }}" id="{{ form.leave_emp.id_for_label }}" class="form-control">
+                                    {% for choice in form.leave_emp.field.choices %}
+                                        {% if not forloop.first %}
+                                            <option value="{{choice.0}}" {% if form.leave_emp.value == choice.0 %}selected{% endif %}>{{choice.1}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="{{form.leave_type.name}}" class=" form-control-label">leave_type</label></div>
+                            <div class="col-12 col-md-9"><input id="{{ form.leave_type.id_for_label }}" name="{{ form.leave_type.name }}" type="text" class="form-control {{ form.leave_type.name }}"
+                                {% if form.leave_type.value != None %}value="{{ form.leave_type.value|stringformat:'s' }}"{% endif %}
+                                maxlength="{{ form.leave_type.field.max_length }}" {% if form.leave_type.field.required %}required{% endif %}>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="{{ form.leave_status.name }}" class=" form-control-label">Leave status </label></div>
+                            <div class="col-12 col-md-9">
+                                <select name="{{ form.leave_status.name }}" id="{{ form.leave_status.id_for_label }}" class="form-control">
+                                    {% for choice in form.leave_status.field.choices %}
+                                        {% if not forloop.first %}
+                                            <option value="{{choice.0}}" {% if form.leave_status.value == choice.0 %}selected{% endif %}>{{choice.1}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="{{form.leave_from_date.name}}" class=" form-control-label">leave_from_datee</label></div>
+                            <div class="col-12 col-md-9"><input id="{{ form.leave_from_date.id_for_label }}" name="{{ form.leave_from_date.name }}" type="text" class="form-control {{ form.leave_from_date.name }}"
+                                {% if form.leave_from_date.value != None %}value="{{ form.leave_from_date.value|stringformat:'s' }}"{% endif %}
+                                maxlength="{{ form.leave_from_date.field.max_length }}" {% if form.leave_from_date.field.required %}required{% endif %}>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="{{form.leave_to_date.name}}" class=" form-control-label">leave_to_date</label></div>
+                            <div class="col-12 col-md-9"><input id="{{ form.leave_to_date.id_for_label }}" name="{{ form.leave_to_date.name }}" type="text" class="form-control {{ form.leave_to_date.name }}"
+                                {% if form.leave_to_date.value != None %}value="{{ form.leave_to_date.value|stringformat:'s' }}"{% endif %}
+                                maxlength="{{ form.leave_to_date.field.max_length }}" {% if form.leave_to_date.field.required %}required{% endif %}>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="{{form.leave_msg.name}}" class=" form-control-label">leave_msg</label></div>
+                            <div class="col-12 col-md-9"><input id="{{ form.leave_msg.id_for_label }}" name="{{ form.leave_msg.name }}" type="text" class="form-control {{ form.leave_msg.name }}"
+                                {% if form.leave_msg.value != None %}value="{{ form.leave_msg.value|stringformat:'s' }}"{% endif %}
+                                maxlength="{{ form.leave_msg.field.max_length }}" {% if form.leave_msg.field.required %}required{% endif %}>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                            </button>
+                        </div>
+
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endblock %}

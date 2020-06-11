@@ -125,3 +125,17 @@ class Salary(models.Model):
     totalhand = models.IntegerField()
     # def __str__(self):
     #     return self.designation
+
+class Leave_status(models.Model):
+    description = models.CharField(max_length=40,unique=True)
+
+    def __str__(self):
+        return self.description
+
+class Leave(models.Model):
+    leave_emp = models.ForeignKey(Employee,on_delete=models.CASCADE,)
+    leave_type = models.CharField(max_length=100)
+    leave_status = models.ForeignKey(Leave_status,on_delete=models.CASCADE,)
+    leave_from_date = models.DateTimeField(null=True)
+    leave_to_date = models.DateTimeField(null=True)
+    leave_msg = models.CharField(max_length=100)

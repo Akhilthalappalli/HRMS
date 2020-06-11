@@ -1,6 +1,6 @@
 from django.contrib import admin
 from app1.models import Gender,MaritalStatus,Designation,Department,Employee,add_holiday,Salary
-from app1.models import UserRole,UserStatus,User,MenuMaster,RolePermission,attendance
+from app1.models import UserRole,UserStatus,User,MenuMaster,RolePermission,attendance,Leave,Leave_status
 
 # Register your models here.
 
@@ -17,3 +17,5 @@ admin.site.register(MenuMaster)
 admin.site.register(RolePermission)
 admin.site.register(attendance)
 admin.site.register(Salary)
+admin.site.register(Leave)
+admin.site.register(Leave_status)

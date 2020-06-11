@@ -11,6 +11,9 @@ from app1.models import User, UserRole, RolePermission, MenuMaster, Salary, Empl
 from.import models
 import datetime
 
+from app1.models import Leave
+from app1.forms import LeaveForm
+
 
 # Create your views here.
 def dashboard(request):
@@ -400,3 +403,58 @@ def deletesalary(request, salid):
     if ob:
         ob.delete()
         return redirect('salaryren')
+
+
+def leave_view(request):
+    data = Leave.objects.all()
+    return render(request,"leave_view.html",{"data":data})
+
+def manage_leave(request):
+
+    manage_leave_id = int(request.GET["id"])
+
+    form = LeaveForm()
+    if manage_leave_id > 0:
+        leave_record = Leave.objects.get(id = manage_leave_id)
+        form = LeaveForm(instance=leave_record)
+
+
+
+    if request.method == 'POST':
+        form = LeaveForm(request.POST)
+        print("called...")
+        if manage_leave_id > 0:
+            form = LeaveForm(request.POST,instance= leave_record)
+
+        if form.is_valid():
+             form.save()
+             return HttpResponseRedirect('/leave_view')
+
+
+    return render(request,'addleave.html',{"form":form,"id":manage_leave_id})
+
+
+def leave(request):
+    return render(request,'addleave.html')
+
+
+
+def addleave(request):
+    print("ok..........")
+
+
+    form = LeaveForm()
+    if request.method == 'POST':
+        print("called...............")
+
+        form = LeaveForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+
+
+            return HttpResponseRedirect('addleave')
+        else:
+            return HttpResponseRedirect('dashboard')
+
+    return render(request,'addleave.html',{"form":form})
