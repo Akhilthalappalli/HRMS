@@ -56,7 +56,8 @@
                                     <td>{{d.fullname}}</td>
                                     <td>{{d.status}}</td>
                                     <td><a data-toggle="modal" data-target="#myModal" href="#" data-href="manage?id={{d.id}}"  class="openPopup"> <i class="fas fa-pen" style='font-size:18px;color:#c0c0c0'></i></a></td>
-                                    <td><a href="delete/{{d.id}}" onclick="return myFunction();"><i class='fas fa-trash' style='font-size:18px;color:#c0c0c0'></i></a></td>
+                                    <td><a data-toggle="modal" data-target="#myModal" href="delete/{{d.id}}" onclick="return myFunction();"><i class='fas fa-trash' style='font-size:18px;color:#c0c0c0'></i></a></td>
+
                                 </tr>
                               {% endfor %}
 
